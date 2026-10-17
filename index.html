@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Visitor Counter</title>
+    <style>
+        .counter-box {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        #visitor-count {
+            font-weight: bold;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="counter-box">
+        <h2>Total Visitors: <span id="visitor-count">Loading...</span></h2>
+    </div>
+
+    <script>
+        // Replace 'yourwebsite.com' with your actual domain or a unique key
+       // const namespace = "yourwebsite.com";
+          const namespace ="https://stewart147.github.io/visits/";
+        const key = "homepage";
+
+        async function updateCounter() {
+            try {
+                // This API automatically increments the count by 1 on every page load
+                const response = await fetch(`https://countapi.xyz{namespace}/${key}`);
+                const data = await response.json();
+                
+                // Display the updated count on the webpage
+                document.getElementById('visitor-count').innerText = data.value;
+            } catch (error) {
+                console.error("Error fetching visitor count:", error);
+                document.getElementById('visitor-count').innerText = "Unavailable";
+            }
+        }
+
+        // Run the function when the page loads
+        window.onload = updateCounter;
+    </script>
+</body>
+</html>
